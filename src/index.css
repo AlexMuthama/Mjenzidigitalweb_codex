@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #F7F3E8;
+    color: #1F2421;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  ::selection {
+    background-color: #C6F432;
+    color: #0F3D2E;
+  }
+
+  :focus-visible {
+    outline: 2px solid #C6F432;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-mj {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .container-mj-wide {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: #C6F432;
+    color: #0F3D2E;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: #0F3D2E;
+    color: #C6F432;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(15, 61, 46, 0.2);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: transparent;
+    color: #0F3D2E;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 9999px;
+    border: 2px solid #0F3D2E;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #0F3D2E;
+    color: #F7F3E8;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    color: #1F2421;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 9999px;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    background-color: rgba(15, 61, 46, 0.07);
+    color: #0F3D2E;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #4A7D5C;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background-color: #C6F432;
+    border-radius: 2px;
+  }
+
+  .card {
+    background-color: #FEFDF8;
+    border: 1px solid rgba(15, 61, 46, 0.08);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: rgba(15, 61, 46, 0.15);
+    box-shadow: 0 12px 40px rgba(15, 61, 46, 0.08);
+    transform: translateY(-3px);
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #FEFDF8;
+    border: 1.5px solid rgba(15, 61, 46, 0.12);
+    border-radius: 0.75rem;
+    color: #1F2421;
+    font-size: 0.9375rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: #4A7D5C;
+    box-shadow: 0 0 0 3px rgba(157, 181, 160, 0.2);
+  }
+
+  .input-field::placeholder {
+    color: #9DB5A0;
+  }
+
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #C6F432;
+    transition: width 0.3s ease;
+  }
+
+  .link-underline:hover::after {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/spacegrotesk/v15/V8mDoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7aUUw.woff2) format('woff2');
+}
