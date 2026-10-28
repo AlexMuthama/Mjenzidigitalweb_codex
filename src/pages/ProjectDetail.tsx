@@ -79,6 +79,39 @@ export default function ProjectDetail() {
         />
       </section>
 
+      {project.embeds && project.embeds.length > 0 && (
+        <section className="container-mj pb-8 md:pb-12" aria-label="Project references">
+          <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6">
+            {project.embeds.map((embed) => (
+              <article key={embed.url} className="card p-5 md:p-6 min-w-0">
+                <h2 className="font-display font-semibold text-xl text-charcoal-900 leading-snug">
+                  {embed.title}
+                </h2>
+                <div className="mt-4 w-full overflow-hidden rounded-xl border border-forest-800/8 bg-ivory-100">
+                  <iframe
+                    src={embed.url}
+                    title={embed.iframeTitle}
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    className={`block w-full ${embed.title === 'LinkedIn certificate post' ? 'h-[520px] sm:h-[600px]' : 'h-[360px] sm:h-[480px] md:h-[560px]'}`}
+                    allowFullScreen
+                  />
+                </div>
+                <a
+                  href={embed.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-forest-600 hover:text-forest-800 transition-colors"
+                >
+                  {embed.fallbackLabel}
+                  <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ─── CASE STUDY CONTENT ───────────────────────────────── */}
       <section className="container-mj pb-12 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -94,6 +127,44 @@ export default function ProjectDetail() {
               </div>
               <p className="text-lg text-charcoal-700 leading-relaxed">{project.problem}</p>
             </div>
+
+            {project.goals && project.goals.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-display-md text-charcoal-900">Project Goals</h2>
+                </div>
+                <ul className="space-y-3">
+                  {project.goals.map((goal) => (
+                    <li key={goal} className="flex items-start gap-3 text-charcoal-700 leading-relaxed">
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5 text-forest-600" />
+                      <span>{goal}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {project.research && project.research.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600">
+                    <Lightbulb className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-display-md text-charcoal-900">Research and Insights</h2>
+                </div>
+                <ul className="space-y-3 text-lg text-charcoal-700 leading-relaxed">
+                  {project.research.map((insight) => (
+                    <li key={insight} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-3 flex-shrink-0" aria-hidden="true" />
+                      <span>{insight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Process */}
             <div>
@@ -125,6 +196,27 @@ export default function ProjectDetail() {
               </div>
               <p className="text-lg text-charcoal-700 leading-relaxed">{project.solution}</p>
             </div>
+
+            {project.userFlow && project.userFlow.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-display-md text-charcoal-900">User Flow</h2>
+                </div>
+                <ol className="space-y-4">
+                  {project.userFlow.map((step, index) => (
+                    <li key={step} className="flex items-start gap-4 p-5 rounded-xl bg-ivory-100 border border-forest-800/6">
+                      <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-forest-800 text-lime-400 font-display font-bold text-sm flex-shrink-0">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <p className="text-charcoal-700 leading-relaxed pt-1">{step}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
 
             {/* Automation projects */}
             {project.automationProjects && project.automationProjects.length > 0 && (
@@ -198,6 +290,172 @@ export default function ProjectDetail() {
               </div>
             )}
 
+            {project.caseStudyProjects && project.caseStudyProjects.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600">
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-display-md text-charcoal-900">Related Data Projects</h2>
+                </div>
+                <div className="space-y-6">
+                  {project.caseStudyProjects.map((caseStudyProject) => (
+                    <article key={caseStudyProject.title} className="card p-6 md:p-8">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-forest-600 mb-2">
+                        {caseStudyProject.statusLabel || 'Project exercise'}
+                      </p>
+                      <h3 className="font-display font-semibold text-xl text-charcoal-900 leading-snug mb-3">
+                        {caseStudyProject.title}
+                      </h3>
+                      <p className="text-charcoal-700 leading-relaxed mb-6">{caseStudyProject.description}</p>
+
+                      {(caseStudyProject.overview || caseStudyProject.businessProblem) && (
+                        <div className="space-y-5 mb-6">
+                          {caseStudyProject.overview && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-2">Project overview</h4>
+                              <p className="text-sm text-charcoal-700 leading-relaxed">{caseStudyProject.overview}</p>
+                            </div>
+                          )}
+                          {caseStudyProject.businessProblem && (
+                            <div>
+                              <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-2">Business problem</h4>
+                              <p className="text-sm text-charcoal-700 leading-relaxed">{caseStudyProject.businessProblem}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">
+                            {caseStudyProject.objectivesLabel || 'Objectives'}
+                          </h4>
+                          <ul className="space-y-2.5">
+                            {caseStudyProject.objectives.map((objective) => (
+                              <li key={objective} className="flex items-start gap-3 text-sm text-charcoal-700 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                                <span>{objective}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">
+                            {caseStudyProject.methodsLabel || 'Methods'}
+                          </h4>
+                          <ul className="space-y-2.5">
+                            {caseStudyProject.methods.map((method) => (
+                              <li key={method} className="flex items-start gap-3 text-sm text-charcoal-700 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                                <span>{method}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {caseStudyProject.scopeMetrics && caseStudyProject.scopeMetrics.length > 0 && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">
+                            Planned recruitment metrics and required fields
+                          </h4>
+                          <ol className="space-y-2.5">
+                            {caseStudyProject.scopeMetrics.map((metric) => (
+                              <li key={metric} className="flex items-start gap-3 text-sm text-charcoal-700 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                                <span>{metric}</span>
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      )}
+
+                      {caseStudyProject.dataset && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">Dataset and preparation</h4>
+                          <p className="text-sm text-charcoal-700 leading-relaxed">{caseStudyProject.dataset}</p>
+                        </div>
+                      )}
+
+                      {caseStudyProject.dashboardPages && caseStudyProject.dashboardPages.length > 0 && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">Planned Power BI dashboard pages</h4>
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {caseStudyProject.dashboardPages.map((page) => (
+                              <li key={page} className="p-4 rounded-xl bg-ivory-100 border border-forest-800/6 text-sm text-charcoal-700 leading-relaxed">
+                                {page}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {caseStudyProject.findingsAndRecommendations && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">Key findings and recommendations</h4>
+                          <p className="text-sm text-charcoal-700 leading-relaxed">{caseStudyProject.findingsAndRecommendations}</p>
+                        </div>
+                      )}
+
+                      {caseStudyProject.limitations && caseStudyProject.limitations.length > 0 && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">Project limitations</h4>
+                          <ul className="space-y-2.5">
+                            {caseStudyProject.limitations.map((limitation) => (
+                              <li key={limitation} className="flex items-start gap-3 text-sm text-charcoal-700 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                                <span>{limitation}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <div className="mt-6">
+                        <h4 className="text-sm font-semibold text-forest-700 uppercase tracking-wider mb-3">Planned deliverables</h4>
+                        <ul className="space-y-2.5">
+                          {caseStudyProject.deliverables.map((deliverable) => (
+                            <li key={deliverable} className="flex items-start gap-3 text-sm text-charcoal-700 leading-relaxed">
+                              <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mt-2 flex-shrink-0" aria-hidden="true" />
+                              <span>{deliverable}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mt-6">
+                        <span className="w-full text-sm font-semibold text-forest-700 uppercase tracking-wider">
+                          {caseStudyProject.toolsLabel || 'Tools'}
+                        </span>
+                        {caseStudyProject.tools.map((tool) => (
+                          <span key={tool} className="px-3 py-1.5 rounded-lg bg-forest-800/6 text-charcoal-700 text-xs font-medium">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-3 mt-6">
+                        {caseStudyProject.links.map((link) => (
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-forest-800 text-ivory-300 text-sm font-semibold hover:bg-forest-700 transition-all"
+                          >
+                            <ExternalLink className="w-4 h-4 text-lime-500" aria-hidden="true" />
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Results - only if verified results exist */}
             {project.results && (
               <div>
@@ -208,6 +466,18 @@ export default function ProjectDetail() {
                   <h2 className="text-display-md text-charcoal-900">Results</h2>
                 </div>
                 <p className="text-lg text-charcoal-700 leading-relaxed">{project.results}</p>
+              </div>
+            )}
+
+            {project.outcome && (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-display-md text-charcoal-900">Project Outcome</h2>
+                </div>
+                <p className="text-lg text-charcoal-700 leading-relaxed">{project.outcome}</p>
               </div>
             )}
 

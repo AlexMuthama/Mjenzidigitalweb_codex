@@ -163,9 +163,22 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.slice(0, 3).map((p, i) => (
-            <ProjectCard key={i} {...p} />
-          ))}
+          {projects.slice(0, 3).map((p, i) => {
+            const demoLinks = p.slug === 'ai-workflow-automation-prototype'
+              ? (p.automationProjects ?? []).flatMap((automation) =>
+                  automation.links
+                    .filter((link) => link.url.startsWith('https://www.loom.com/share/'))
+                    .map((link, linkIndex) => ({
+                      label: automation.title === 'Form Submission & Email Automation'
+                        ? `${automation.title} — Demo ${linkIndex + 1}`
+                        : `${automation.title} — Demo`,
+                      url: link.url,
+                    }))
+                )
+              : undefined;
+
+            return <ProjectCard key={i} {...p} demoLinks={demoLinks} />;
+          })}
         </div>
 
         <div className="text-center mt-8">

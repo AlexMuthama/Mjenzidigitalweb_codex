@@ -9,6 +9,7 @@ interface ProjectCardProps {
   status: string;
   cover: string | null;
   summary: string;
+  demoLinks?: { label: string; url: string }[];
 }
 
 const statusStyles: Record<string, string> = {
@@ -18,10 +19,10 @@ const statusStyles: Record<string, string> = {
   Completed: 'bg-forest-500 text-ivory-300',
 };
 
-export default function ProjectCard({ slug, name, category, status, cover, summary }: ProjectCardProps) {
+export default function ProjectCard({ slug, name, category, status, cover, summary, demoLinks }: ProjectCardProps) {
   return (
-    <Link to={`/work/${slug}`} className="block group">
-      <article className="card overflow-hidden h-full">
+    <article className="card overflow-hidden h-full">
+      <Link to={`/work/${slug}`} className="block group">
         <div className="relative">
           <ImagePlaceholder
             src={cover}
@@ -47,7 +48,23 @@ export default function ProjectCard({ slug, name, category, status, cover, summa
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
         </div>
-      </article>
-    </Link>
+      </Link>
+      {demoLinks && demoLinks.length > 0 && (
+        <div className="border-t border-forest-800/8 px-6 py-4 flex flex-col items-start gap-2">
+          {demoLinks.map((demo) => (
+            <a
+              key={demo.url}
+              href={demo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-start gap-1.5 text-xs sm:text-sm font-semibold leading-snug text-forest-600 hover:text-forest-800 transition-colors"
+            >
+              <ArrowUpRight className="w-4 h-4 flex-shrink-0 mt-px" />
+              <span>{demo.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </article>
   );
 }

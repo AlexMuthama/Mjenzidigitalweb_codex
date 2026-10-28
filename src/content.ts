@@ -53,11 +53,11 @@ export const contact = {
 // ─── HOME PAGE ──────────────────────────────────────────────────────────
 export const home = {
   hero: {
-    headline: 'Building smarter systems. Creating meaningful impact.',
+    headline: 'Digital solutions that help your business work smarter and grow.',
     supporting:
-      'Mjenzi is a Kenyan digital solutions agency helping businesses, startups, entrepreneurs, and organisations turn everyday challenges into practical digital solutions through websites, AI automation, business systems, and data.',
-    primaryButton: { label: 'Explore Our Work', link: '/work' },
-    secondaryButton: { label: 'Build With Mjenzi', link: '/contact' },
+      'Mjenzi Digital helps SMEs, startups, entrepreneurs, and organisations grow through website development, AI automation, business systems, dashboards, data analysis, and digital marketing. We simplify manual work, turn data into better decisions, and help businesses strengthen their online presence.',
+    primaryButton: { label: 'Start a Conversation', link: '/contact' },
+    secondaryButton: { label: 'View Our Work', link: '/work' },
   },
   intro: {
     label: 'The Builder',
@@ -223,11 +223,39 @@ export interface ProjectLink {
   secondary?: boolean;
 }
 
+export interface ProjectEmbed {
+  title: string;
+  iframeTitle: string;
+  url: string;
+  fallbackLabel: string;
+}
+
 export interface AutomationProject {
   title: string;
   description: string;
   details: string[];
   overview: string;
+  tools: string[];
+  links: ProjectLink[];
+}
+
+export interface CaseStudyProject {
+  title: string;
+  statusLabel?: string;
+  description: string;
+  overview?: string;
+  businessProblem?: string;
+  objectivesLabel?: string;
+  objectives: string[];
+  scopeMetrics?: string[];
+  methodsLabel?: string;
+  methods: string[];
+  dataset?: string;
+  dashboardPages?: string[];
+  findingsAndRecommendations?: string;
+  limitations?: string[];
+  deliverables: string[];
+  toolsLabel?: string;
   tools: string[];
   links: ProjectLink[];
 }
@@ -240,15 +268,21 @@ export interface Project {
   cover: string | null;
   summary: string;
   problem: string;
+  goals?: string[];
+  research?: string[];
   role: string;
   tools: string[];
   process: string[];
   solution: string;
+  userFlow?: string[];
+  outcome?: string;
   results: string | null;
   lessons: string;
   links: ProjectLink[];
   screenshots: string[];
+  embeds?: ProjectEmbed[];
   automationProjects?: AutomationProject[];
+  caseStudyProjects?: CaseStudyProject[];
 }
 
 export const projects: Project[] = [
@@ -373,30 +407,188 @@ export const projects: Project[] = [
     solution: 'An interactive dashboard that consolidates business data into a single view, with key metrics, trends, and the ability to drill down into details.',
     results: null,
     lessons: 'A dashboard is only useful if it answers questions the business actually asks. The design should start from the decisions, not the data.',
-    links: [],
+    links: [
+      {
+        label: 'View the LinkedIn Project Post',
+        url: 'https://lnkd.in/p/dPbNcB3M',
+      },
+    ],
     screenshots: [],
+    caseStudyProjects: [
+      {
+        title: 'Recruitment Analytics',
+        statusLabel: 'Planned — dashboard and analysis not verified',
+        description: 'A planned project to analyze recruitment data and help an HR organization identify opportunities to improve hiring efficiency using an Excel dashboard, recruitment process performance indicators, relevant charts, and written insights.',
+        overview: 'The planned dashboard will present the recruitment measures below. Each chart will be accompanied by a written, evidence-based insight explaining what the data shows and what actions the HR team could consider. No completed dashboard, recruitment dataset, or analysis output is available to verify.',
+        businessProblem: 'The project aims to help an HR organization understand recruitment process performance and identify opportunities to improve hiring efficiency, using data-supported insights rather than unsupported conclusions.',
+        objectivesLabel: 'Objectives and scope',
+        objectives: [
+          'Analyze recruitment data to help identify opportunities to improve hiring efficiency.',
+          'Present the requested recruitment process performance indicators in a planned Excel dashboard with relevant charts.',
+          'Accompany each chart with a written insight supported by the data and practical actions the HR team could consider.',
+        ],
+        scopeMetrics: [
+          'Time from application to interview — requires an application received date and interview date.',
+          'Time to hire — requires an application received date and a confirmed endpoint such as offer acceptance or employee start; the chosen definition must be documented.',
+          'Time to publish a job advertisement — requires the requisition approval or request date and advertisement publication date.',
+          'Number of days a vacancy remains open — requires the vacancy open or advertisement publication date and the agreed close or fill date.',
+          'End-of-probation date — calculate from employee start date and the policy-defined probation period; this is a calendar date field, not a duration metric.',
+          'Time from employee onboarding to opening the employee file — requires the onboarding date and employee file opened date.',
+          'Time between interview and candidate reporting date — requires the relevant interview date and candidate reporting or start date.',
+          'Time taken to approve a recruitment requisition — requires requisition submission date and final approval date.',
+          'Time taken to close an employee file — requires the employee separation or last working date and employee file closure date.',
+          'Time until an employee is included in benefits — requires the applicable employment or benefits eligibility date and benefits enrollment or effective date.',
+        ],
+        methodsLabel: 'Planned analytical approach',
+        methods: [
+          'Inspect available recruitment data and confirm the required date fields, event definitions, and calculation rules before calculating the indicators.',
+          'Calculate only measures supported by verified source fields; document unavailable or incomplete fields rather than estimating them.',
+          'Use relevant Excel charts and dashboard elements to present each supported indicator with a written, evidence-based interpretation and possible HR actions.',
+        ],
+        dataset: 'No recruitment dataset or completed dashboard was found in the available workspace. The date fields listed for each indicator are required inputs; the measures and charts cannot be calculated or verified until those fields are available.',
+        findingsAndRecommendations: 'No recruitment findings or recommendations are reported until source data are available and analyzed.',
+        limitations: [
+          'No recruitment dataset, completed Excel dashboard, charts, or analysis outputs were found in the available workspace; this section remains planned.',
+          'Several indicators depend on exact dates and event definitions. Their required source fields and calculation rules must be validated before analysis.',
+          'The time-to-hire endpoint and the date a vacancy is considered closed must be defined consistently before comparing results.',
+        ],
+        deliverables: [
+          'Planned: an Excel dashboard with relevant charts for the recruitment indicators supported by the source data.',
+          'Planned: written, evidence-based insights alongside each chart, explaining what it shows and possible actions for the HR team to consider.',
+        ],
+        toolsLabel: 'Planned tool',
+        tools: ['Microsoft Excel'],
+        links: [],
+      },
+      {
+        title: 'Excel Data Project — Customer Segmentation and Data Profiling',
+        description: 'A project exercise using a simulated transaction dataset for 100 hypothetical customers to examine data quality and transaction patterns.',
+        objectives: [
+          'Load and inspect the transaction dataset.',
+          'Identify data quality issues and explain how they could affect analysis.',
+          'Draft a client-style email describing the issues and recommending improvements to future data collection.',
+          'Analyze monthly transaction volumes and average transaction amounts.',
+          'Segment transactions by date and time to examine volume and spending throughout a typical day.',
+          'Summarize observations and recommendations in a 2–3 slide presentation.',
+        ],
+        methods: [
+          'Use Excel navigation and data management, functions and formulas, lookups and cell referencing, conditional aggregation, filters, and conditional formatting.',
+          'Clean and profile the data, then analyze transaction patterns and customer segments.',
+          'Communicate analysis and recommendations through a concise presentation.',
+        ],
+        deliverables: [
+          'Planned: a client-style email describing data quality issues and recommendations.',
+          'Planned: a 2–3 slide presentation summarizing observations and recommendations.',
+        ],
+        tools: ['Microsoft Excel'],
+        links: [
+          {
+            label: 'View transaction dataset',
+            url: 'https://drive.google.com/file/d/1GD15KgjfLBotCCDd2IjNg2bR_wuXnKAd/view?usp=sharing',
+          },
+        ],
+      },
+      {
+        title: 'HR Workforce Analytics & Employee Attrition Intelligence',
+        statusLabel: 'Planned — data analysis and dashboard not yet verified',
+        description: 'A planned workforce analytics project for a fictional medium-sized organization, focused on workforce composition, employee attrition, retention risks, compensation patterns, job satisfaction, and work-life balance.',
+        overview: 'The project brief calls for an evidence-led view of workforce composition and employee attrition to help HR leadership investigate retention risks. No HR dataset or completed analysis artifacts were found in the available workspace, so this case study is presented as planned work.',
+        businessProblem: 'HR leadership needs a clear, data-supported way to understand which employee groups are associated with attrition and where further investigation may be useful. Relationships in snapshot data will be described as associations, not causes.',
+        objectivesLabel: 'Objectives and key business questions',
+        objectives: [
+          'Measure workforce size and the proportion of records marked as attrition, using a clearly defined denominator.',
+          'Compare attrition by department, job role, age group, tenure, salary band, and overtime status.',
+          'Examine job satisfaction and work-life balance in relation to attrition.',
+          'Describe workforce demographics and compensation patterns where supported by the data.',
+          'Identify employee segments for further investigation and develop evidence-based retention recommendations after analysis.',
+        ],
+        methodsLabel: 'Analytical approach',
+        methods: [
+          'Inspect the source columns, data types, record count, missing values, duplicates, and category values before defining transformations.',
+          'Use Python with pandas for a reproducible data quality review and preparation pipeline, preserving the raw source data.',
+          'Use SQL for workforce summaries and attrition comparisons, and DAX measures for a Power BI semantic model where implemented and validated.',
+          'Treat the dataset as a snapshot unless verified historical records support time-based analysis; distinguish attrition proportion from turnover rate.',
+        ],
+        dataset: 'The brief identifies the IBM HR Analytics Employee Attrition & Performance dataset as the intended primary source. No HR data file was found in the available workspace, so its schema, record count, data quality, and licensing have not been verified here. Any supplementary data must be clearly labeled synthetic.',
+        dashboardPages: [
+          'Executive Workforce Overview — planned',
+          'Attrition Deep Dive — planned',
+          'Workforce Demographics — planned',
+          'Retention & Employee Experience — planned',
+        ],
+        findingsAndRecommendations: 'No data-derived findings or retention recommendations are reported yet because the dataset has not been inspected or analyzed.',
+        limitations: [
+          'No HR dataset, prepared data, SQL analysis, Python pipeline, DAX measures, or dashboard artifacts were found in the available project workspace.',
+          'A finished Power BI .pbix file has not been verified.',
+          'If the source is a single employee snapshot, it cannot support historical hiring, termination, headcount, or time-based turnover trends.',
+          'Observed relationships between employee attributes and attrition would not establish causation.',
+        ],
+        deliverables: [
+          'Planned: a documented data preparation pipeline, data quality report, and clean dataset for Power BI.',
+          'Planned: SQL analysis queries and validated DAX measures with documented definitions.',
+          'Planned: four Power BI report pages and a findings and recommendations summary based on analyzed data.',
+          'Planned: project documentation covering the dataset, methodology, data model, measures, limitations, and reproduction steps.',
+        ],
+        toolsLabel: 'Planned tools',
+        tools: ['Power BI (primary dashboard tool)', 'Python with pandas', 'SQL', 'DAX'],
+        links: [],
+      },
+    ],
   },
   {
     slug: 'website-digital-system-experiment',
     name: 'Website & Digital-System Experiment',
     category: 'Websites and digital products',
-    status: 'Concept',
-    cover: 'https://images.pexels.com/photos/30690398/pexels-photo-30690398.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary: 'An experiment combining a website with integrated business systems - not just a brochure, but a working tool.',
-    problem: 'Most small business websites are static brochures. What if a website could also handle bookings, enquiries, and basic business processes?',
-    role: 'Concept design, architecture planning, and prototyping.',
-    tools: ['React', 'Supabase', 'Tailwind CSS', 'Vite'],
-    process: [
-      'Researched what small businesses need from a website beyond just displaying information.',
-      'Sketched the concept - a website that doubles as a lightweight business system.',
-      'Planned the architecture for how the frontend, database, and automation would connect.',
-      'Began prototyping the idea as a learning exercise.',
+    status: 'Completed',
+    cover: '/fitpro-website-screenshot.png',
+    summary: 'A functional gym website designed in Figma and developed with WordPress and third-party integrations.',
+    problem: 'Many websites overwhelm users with cluttered layouts, unclear navigation, and complicated user journeys. Gym websites also need to communicate membership options clearly while making registration and account management convenient.',
+    goals: [
+      'Develop a professional website from the ground up.',
+      'Create a responsive experience across desktop and mobile devices.',
+      'Use WordPress for flexible content management.',
+      'Integrate membership functionality using WordPress integrations.',
+      'Deliver a clean, consistent, and user-friendly interface.',
     ],
-    solution: 'A concept exploring how websites can go beyond static pages and become functional tools that support real business operations.',
+    research: [
+      'Reviewed similar websites to identify effective practices for navigation, layout, and responsive design.',
+      'Prioritised clear information hierarchy, readable typography, minimal distractions, and a consistent transition from the Figma design to the working website.',
+    ],
+    role: 'UI/UX design in Figma, WordPress development, and third-party integrations.',
+    tools: ['Figma', 'WordPress', 'WordPress integrations'],
+    process: [
+      'Designed the user interface and experience in Figma, focusing on clarity, readable typography, and minimal distractions.',
+      'Developed the responsive gym website in WordPress.',
+      'Integrated membership-related functionality using WordPress integrations.',
+    ],
+    solution: 'A professional, responsive gym website where users can explore programs, compare membership plans, select subscriptions, and manage their accounts through integrated membership functionality.',
+    userFlow: [
+      'Visit the website and navigate to Memberships, Programs, and Contact.',
+      'Explore available membership plans, pricing, features, and benefits.',
+      'Select a suitable membership plan and review its details.',
+      'Register or log in through the integrated membership functionality.',
+      'Access available account and membership-management options.',
+      'Follow the available cancellation process where supported by the integration.',
+    ],
     results: null,
+    outcome: 'The project demonstrates the integration of interface design, WordPress development, and third-party functionality to deliver a working digital platform. It showcases an approach to building responsive websites that combine professional presentation with practical user needs.',
     lessons: 'The boundary between a website and a business system is disappearing. Building both together from the start is simpler than bolting systems onto a static site later.',
     links: [],
     screenshots: [],
+    embeds: [
+      {
+        title: 'LinkedIn certificate post',
+        iframeTitle: 'LinkedIn certificate post for the Website & Digital-System Experiment',
+        url: 'https://www.linkedin.com/embed/feed/update/urn:li:share:7396074829243817984?collapsed=1',
+        fallbackLabel: 'Open the LinkedIn post',
+      },
+      {
+        title: 'Behance portfolio project',
+        iframeTitle: 'Behance portfolio project for the Website & Digital-System Experiment',
+        url: 'https://www.behance.net/embed/project/235009673?ilo0=1',
+        fallbackLabel: 'Open the Behance project',
+      },
+    ],
   },
 ];
 
