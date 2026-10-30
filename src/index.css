@@ -187,12 +187,90 @@
   }
 }
 
+@keyframes homeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-page .animate-fade-up {
+  animation-name: homeFadeUp;
+  animation-duration: 650ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-page .home-original-ratio-image > img {
+  padding: 0;
+}
+
+.home-page.home-motion-ready .home-scroll-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 560ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-page.home-motion-ready .home-scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-page .btn-primary:active,
+.home-page .btn-secondary:active,
+.home-page .btn-ghost:active {
+  transform: translateY(0) scale(0.99);
+  transition-duration: 100ms;
+}
+
+.home-page .link-underline:active {
+  color: #0F3D2E;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .home-page .home-service-card {
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
+  }
+
+  .home-page .home-service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(4, 29, 23, 0.2);
+  }
+
+  .home-page .home-project-grid .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 61, 46, 0.1);
+  }
+}
+
+@media (hover: none) {
+  .home-page .home-service-card:hover,
+  .home-page .home-project-grid .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .home-page .animate-fade-up,
+  .home-page .home-scroll-reveal,
+  .home-page .home-service-card,
+  .home-page .home-project-grid .card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

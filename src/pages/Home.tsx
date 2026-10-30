@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Globe, Bot, Settings, BarChart, Compass, Wrench, FlaskConical, Rocket } from 'lucide-react';
 import { home, identity, services, projects, building, images } from '@/content';
@@ -13,8 +14,40 @@ const serviceIcons: Record<string, typeof Globe> = {
 };
 
 export default function Home() {
+  useLayoutEffect(() => {
+    const homePage = document.querySelector<HTMLElement>('.home-page');
+    const revealTargets = document.querySelectorAll<HTMLElement>('.home-scroll-reveal');
+
+    const showAll = () => revealTargets.forEach((target) => target.classList.add('is-visible'));
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      showAll();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -32px 0px' }
+    );
+
+    homePage?.classList.add('home-motion-ready');
+    revealTargets.forEach((target) => observer.observe(target));
+
+    return () => {
+      observer.disconnect();
+      homePage?.classList.remove('home-motion-ready');
+    };
+  }, []);
+
   return (
-    <div className="animate-fade-in">
+    <div className="home-page animate-fade-in">
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-ivory-300">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-60" />
@@ -61,8 +94,9 @@ export default function Home() {
               <ImagePlaceholder
                 src={images.hero}
                 alt="Two Black African women collaborating on laptops in a modern workspace"
-                aspectRatio="aspect-[4/3]"
-                className="rounded-3xl shadow-2xl ring-1 ring-forest-800/10"
+                aspectRatio="aspect-[43/64]"
+                fit="contain"
+                className="home-original-ratio-image mx-auto w-full max-w-[400px] rounded-3xl shadow-2xl ring-1 ring-forest-800/10"
               />
             </div>
           </div>
@@ -70,7 +104,7 @@ export default function Home() {
       </section>
 
       {/* ─── INTRO ────────────────────────────────────────────── */}
-      <section className="container-mj py-16 md:py-20">
+      <section className="container-mj py-16 md:py-20 home-scroll-reveal">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-7">
             <span className="section-label">{home.intro.label}</span>
@@ -89,9 +123,10 @@ export default function Home() {
             <ImagePlaceholder
               src={images.architectureAccent}
               alt="Nairobi skyline showcasing modern Kenyan architecture"
-              aspectRatio="aspect-[4/5]"
+              aspectRatio="aspect-[1672/941]"
+              fit="contain"
               label="Mjenzi builds practical digital solutions with thoughtful design and structure"
-              className="rounded-2xl shadow-xl"
+              className="home-original-ratio-image rounded-2xl shadow-xl"
             />
           </div>
         </div>
@@ -101,7 +136,7 @@ export default function Home() {
       <section className="bg-forest-800 py-16 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-[0.04]" />
         <div className="container-mj relative">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 home-scroll-reveal">
             <span className="section-label text-lime-400 [&::before]:bg-lime-400">
               What We Do
             </span>
@@ -117,8 +152,7 @@ export default function Home() {
                 <Link
                   key={i}
                   to="/services"
-                  className="group bg-forest-700/40 backdrop-blur-sm border border-forest-600/30 rounded-2xl p-7 transition-all duration-300 hover:border-lime-400/40 hover:bg-forest-700/60 hover:-translate-y-1"
-                  style={{ animationDelay: `${i * 60}ms` }}
+                  className="home-service-card home-scroll-reveal group bg-forest-700/40 backdrop-blur-sm border border-forest-600/30 rounded-2xl p-7 transition-all duration-300 hover:border-lime-400/40 hover:bg-forest-700/60 hover:-translate-y-1"
                 >
                   <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-lime-400/10 text-lime-400 mb-5 transition-colors group-hover:bg-lime-400 group-hover:text-forest-800">
                     <Icon className="w-6 h-6" />
@@ -149,7 +183,7 @@ export default function Home() {
 
       {/* ─── SELECTED WORK PREVIEW ────────────────────────────── */}
       <section className="container-mj py-16 md:py-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="home-scroll-reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
             <span className="section-label">Selected Work</span>
             <h2 className="text-display-lg text-charcoal-900 mt-5">
@@ -162,23 +196,15 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.slice(0, 3).map((p, i) => {
-            const demoLinks = p.slug === 'ai-workflow-automation-prototype'
-              ? (p.automationProjects ?? []).flatMap((automation) =>
-                  automation.links
-                    .filter((link) => link.url.startsWith('https://www.loom.com/share/'))
-                    .map((link, linkIndex) => ({
-                      label: automation.title === 'Form Submission & Email Automation'
-                        ? `${automation.title} — Demo ${linkIndex + 1}`
-                        : `${automation.title} — Demo`,
-                      url: link.url,
-                    }))
-                )
-              : undefined;
-
-            return <ProjectCard key={i} {...p} demoLinks={demoLinks} />;
-          })}
+        <div className="home-project-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.slice(0, 3).map((p, i) => (
+            <div
+              key={i}
+              className="home-scroll-reveal"
+            >
+              <ProjectCard {...p} />
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-8">
@@ -190,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* ─── BUILDING TEASER ──────────────────────────────────── */}
-      <section className="bg-ivory-100 py-16 md:py-20 border-y border-forest-800/6">
+      <section className="bg-ivory-100 py-16 md:py-20 border-y border-forest-800/6 home-scroll-reveal">
         <div className="container-mj">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
@@ -247,7 +273,7 @@ export default function Home() {
 
       {/* ─── CTA ──────────────────────────────────────────────── */}
       <section className="container-mj py-16 md:py-20">
-        <div className="relative overflow-hidden rounded-3xl bg-forest-800 px-8 md:px-16 py-14 md:py-20 text-center">
+        <div className="home-scroll-reveal relative overflow-hidden rounded-3xl bg-forest-800 px-8 md:px-16 py-14 md:py-20 text-center">
           <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-[0.04]" />
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-lime-400/8 rounded-full blur-3xl" />
           <div className="relative">

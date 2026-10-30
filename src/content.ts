@@ -53,9 +53,9 @@ export const contact = {
 // ─── HOME PAGE ──────────────────────────────────────────────────────────
 export const home = {
   hero: {
-    headline: 'Digital solutions that help your business work smarter and grow.',
+    headline: 'Practical digital solutions for businesses ready to grow.',
     supporting:
-      'Mjenzi Digital helps SMEs, startups, entrepreneurs, and organisations grow through website development, AI automation, business systems, dashboards, data analysis, and digital marketing. We simplify manual work, turn data into better decisions, and help businesses strengthen their online presence.',
+      'Mjenzi Digital helps Kenyan SMEs, startups and organisations build a stronger online presence, simplify everyday operations and use business data to make better decisions.',
     primaryButton: { label: 'Start a Conversation', link: '/contact' },
     secondaryButton: { label: 'View Our Work', link: '/work' },
   },
@@ -267,6 +267,7 @@ export interface Project {
   status: string;
   cover: string | null;
   summary: string;
+  fullDescription?: string;
   problem: string;
   goals?: string[];
   research?: string[];
@@ -292,7 +293,11 @@ export const projects: Project[] = [
     category: 'Creative work and content',
     status: 'In progress',
     cover: '/images/projects/Embu_fashion.jpeg',
-    summary: 'Social Media Manager and Editor for a fashion and awards event in Embu.',
+    summary: "Developed a digital presence for Embu Fashion Weekend and Awards 2026, a celebration of creativity, talent and style. The project highlighted runway showcases, red-carpet moments, fashion presentations and awards, helping audiences discover the event's experiences and stay connected.",
+    fullDescription:
+      "Developed a digital presence for Embu Fashion Weekend and Awards 2026, a fashion and entertainment event celebrating creativity, talent, style, and excellence in the fashion industry. " +
+      "The project focused on showcasing the event's vision, building audience awareness, and creating excitement around the experience. From runway showcases and red-carpet moments to model appearances, fashion presentations, Meet & Greet sessions, DJ performances, live recordings, and Fashion Excellence Awards, the event brought together creatives, fashion enthusiasts, brands, and industry stakeholders. " +
+      "The digital platform was designed to communicate the event's identity, highlight its key experiences, and give audiences an accessible way to discover event information and stay connected.",
     problem: 'The event needed a stronger social media presence to build awareness, attract attendees, and showcase the designers and awards nominees ahead of the 2026 edition.',
     role: 'Social media content creation, visual design, and community engagement.',
     tools: ['Canva', 'Instagram', 'TikTok', 'CapCut', 'Content Planning'],
@@ -313,11 +318,12 @@ export const projects: Project[] = [
     name: 'Marine Retreat - Promotional Vlog',
     category: 'Creative work and content',
     status: 'In progress',
-    cover: 'https://images.pexels.com/photos/29578086/pexels-photo-29578086.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary: 'Content creation and a promotional vlog showcasing a retreat destination.',
+    cover: '/Cards/Gemini_Marine%20card.jpeg',
+    summary: 'Created a promotional vlog for Marine Retreat, a nature and leisure destination in Embu, Kenya. It showcases the scenic surroundings, nature walks, dam experiences, kayaking, boat rides, and accommodation, presenting the destination as a place for relaxation, exploration, and outdoor experiences.',
+    fullDescription: 'Created a promotional vlog for Marine Retreat, a nature and leisure destination in Embu, Kenya. It showcases the scenic surroundings, nature walks, dam experiences, kayaking, boat rides, and accommodation, presenting the destination as a place for relaxation, exploration, and outdoor experiences. The project involved location filming, story planning, editing, and content strategy to help communicate the retreat experience through social video.',
     problem: 'The retreat needed visual storytelling to attract visitors and communicate the experience of staying there.',
     role: 'Vlog production, filming, editing, and content strategy.',
-    tools: ['CapCut', 'Camera', 'Instagram', 'Content planning'],
+    tools: ['CapCut', 'Camera', 'Instagram', 'Content planning', 'TikTok'],
     process: [
       'Visited the location to understand the experience from a guest perspective.',
       'Planned the vlog narrative - what story to tell and in what order.',
@@ -336,7 +342,8 @@ export const projects: Project[] = [
     category: 'AI and automation',
     status: 'Demo',
     cover: '/images/projects/Gemini_Generated_Image_fqesjqfqesjqfqes.jpeg',
-    summary: 'A prototype exploring how AI can automate repetitive business tasks and reduce manual effort.',
+    summary: 'Built a working AI and workflow automation prototype to demonstrate how small businesses can reduce repetitive manual work. The demo explores enquiry handling, response drafting, data updates and reporting tasks, connecting AI with familiar business tools while keeping people in the loop.',
+    fullDescription: 'A prototype exploring how AI can automate repetitive business tasks and reduce manual effort. It was designed and built end-to-end to examine tasks such as data entry, responding to common enquiries, and generating reports. The working demo connects AI with business tools to read enquiries, draft responses, and update records, and was tested with sample inputs. It demonstrates where automation can assist while people retain judgment over important decisions.',
     problem: 'Many small businesses spend significant time on repetitive tasks - data entry, responding to common enquiries, generating reports - that could be partially automated with AI.',
     role: 'Designing and building the automation prototype end-to-end.',
     tools: ['OpenAI API', 'Make (Integromat)', 'Google Sheets', 'Zapier', 'Python'],
@@ -394,7 +401,8 @@ export const projects: Project[] = [
     category: 'Data and dashboards',
     status: 'Demo',
     cover: 'https://images.pexels.com/photos/12969403/pexels-photo-12969403.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary: 'An interactive dashboard turning raw business data into clear, actionable insights.',
+    summary: 'Created an interactive Looker Studio dashboard to bring business data from multiple spreadsheets into one view. The project involved cleaning and structuring data, selecting key metrics, and adding filters so users can explore trends and support clearer business decisions.',
+    fullDescription: 'An interactive dashboard turning raw business data into clear, actionable insights. The source data was spread across multiple spreadsheets, making it difficult to see the full picture or track key metrics over time. The project involved auditing and cleaning the data, structuring it for consistent reporting, and designing an interactive dashboard with key metrics, trends, and filters for exploring details.',
     problem: 'A business had data spread across multiple spreadsheets with no way to see the full picture or track key metrics over time.',
     role: 'Data analysis, dashboard design, and visualisation.',
     tools: ['Google Sheets', 'Looker Studio', 'Excel', 'Data cleaning'],
@@ -541,7 +549,8 @@ export const projects: Project[] = [
     category: 'Websites and digital products',
     status: 'Completed',
     cover: '/fitpro-website-screenshot.png',
-    summary: 'A functional gym website designed in Figma and developed with WordPress and third-party integrations.',
+    summary: 'Designed and developed a responsive gym website using Figma and WordPress with third-party membership integrations. The project focused on clear navigation, membership comparisons, registration and account access, combining a polished online presence with practical website functionality.',
+    fullDescription: 'A functional gym website designed in Figma and developed with WordPress and third-party integrations. The project addressed cluttered layouts and complicated user journeys by prioritizing clear information, readable typography, and responsive design. Visitors can explore programs, compare membership plans, select subscriptions, register or log in, and access supported account and membership-management options.',
     problem: 'Many websites overwhelm users with cluttered layouts, unclear navigation, and complicated user journeys. Gym websites also need to communicate membership options clearly while making registration and account management convenient.',
     goals: [
       'Develop a professional website from the ground up.',
@@ -723,12 +732,11 @@ export const footer = {
 // Reference images (free-to-use from Pexels) used as design accents.
 // Replace with your own images when ready.
 export const images = {
-  hero: 'https://images.pexels.com/photos/8091334/pexels-photo-8091334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  hero: '/Home/New%20Africa.jpeg',
   // Founder portrait shown on the About page
   aboutPhoto: "/founder/Founder_Pic'.jpeg",
   // Nairobi skyline - Kenyan identity accent for intro section
-  architectureAccent:
-    'https://images.pexels.com/photos/15496531/pexels-photo-15496531.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  architectureAccent: '/Home/Mjenzi%20Digital_%20Work%20Smarter,%20Grow.png',
   // Black African professional at workspace
   workspaceAccent:
     'https://images.pexels.com/photos/6149781/pexels-photo-6149781.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',

@@ -74,6 +74,7 @@ export default function Work() {
                   status={p.status}
                   cover={p.cover}
                   summary={p.summary}
+                  fullDescription={p.fullDescription}
                 />
               </div>
             ))}
