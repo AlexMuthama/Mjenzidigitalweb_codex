@@ -126,7 +126,7 @@ export default function Contact() {
             Tell us what your business needs
           </h1>
           <p className="text-lg text-charcoal-700 mt-6 max-w-2xl leading-relaxed">
-            Mjenzi Digital welcomes enquiries from SMEs, startups, entrepreneurs and organisations looking for practical digital solutions—from websites and business systems to AI and workflow automation, dashboards, data analysis and digital marketing. Tell us what you are working on and what you would like to improve.
+            Mjenzi Digital welcomes enquiries from SMEs, startups, entrepreneurs and organisations looking for practical digital solutions - from websites and business systems to AI and workflow automation, dashboards, data analysis and digital marketing. Tell us what you are working on and what you would like to improve.
           </p>
           <a href="#enquiry-form" className="btn-primary mt-7">
             Start an enquiry

@@ -121,7 +121,7 @@ export const about = {
     'For Alex, Mjenzi is a builder’s mindset: turn ideas into useful solutions, create opportunities through thoughtful technology, and build value for the people and organisations those solutions serve.',
   approachTitle: 'A practical way to move forward',
   approachIntro:
-    'We start with the business challenge, agree on a useful direction, and build in collaboration—keeping the solution focused on the people who will use it.',
+    'We start with the business challenge, agree on a useful direction, and build in collaboration - keeping the solution focused on the people who will use it.',
   audienceTitle: 'Who we work with',
   audienceIntro:
     'We work with people and teams looking for a thoughtful, practical way to use digital tools in their business.',
@@ -447,7 +447,7 @@ export const projects: Project[] = [
     caseStudyProjects: [
       {
         title: 'Recruitment Analytics',
-        statusLabel: 'Planned — dashboard and analysis not verified',
+        statusLabel: 'Planned - dashboard and analysis not verified',
         description: 'A planned project to analyze recruitment data and help an HR organization identify opportunities to improve hiring efficiency using an Excel dashboard, recruitment process performance indicators, relevant charts, and written insights.',
         overview: 'The planned dashboard will present the recruitment measures below. Each chart will be accompanied by a written, evidence-based insight explaining what the data shows and what actions the HR team could consider. No completed dashboard, recruitment dataset, or analysis output is available to verify.',
         businessProblem: 'The project aims to help an HR organization understand recruitment process performance and identify opportunities to improve hiring efficiency, using data-supported insights rather than unsupported conclusions.',
@@ -458,16 +458,16 @@ export const projects: Project[] = [
           'Accompany each chart with a written insight supported by the data and practical actions the HR team could consider.',
         ],
         scopeMetrics: [
-          'Time from application to interview — requires an application received date and interview date.',
-          'Time to hire — requires an application received date and a confirmed endpoint such as offer acceptance or employee start; the chosen definition must be documented.',
-          'Time to publish a job advertisement — requires the requisition approval or request date and advertisement publication date.',
-          'Number of days a vacancy remains open — requires the vacancy open or advertisement publication date and the agreed close or fill date.',
-          'End-of-probation date — calculate from employee start date and the policy-defined probation period; this is a calendar date field, not a duration metric.',
-          'Time from employee onboarding to opening the employee file — requires the onboarding date and employee file opened date.',
-          'Time between interview and candidate reporting date — requires the relevant interview date and candidate reporting or start date.',
-          'Time taken to approve a recruitment requisition — requires requisition submission date and final approval date.',
-          'Time taken to close an employee file — requires the employee separation or last working date and employee file closure date.',
-          'Time until an employee is included in benefits — requires the applicable employment or benefits eligibility date and benefits enrollment or effective date.',
+          'Time from application to interview - requires an application received date and interview date.',
+          'Time to hire - requires an application received date and a confirmed endpoint such as offer acceptance or employee start; the chosen definition must be documented.',
+          'Time to publish a job advertisement - requires the requisition approval or request date and advertisement publication date.',
+          'Number of days a vacancy remains open - requires the vacancy open or advertisement publication date and the agreed close or fill date.',
+          'End-of-probation date - calculate from employee start date and the policy-defined probation period; this is a calendar date field, not a duration metric.',
+          'Time from employee onboarding to opening the employee file - requires the onboarding date and employee file opened date.',
+          'Time between interview and candidate reporting date - requires the relevant interview date and candidate reporting or start date.',
+          'Time taken to approve a recruitment requisition - requires requisition submission date and final approval date.',
+          'Time taken to close an employee file - requires the employee separation or last working date and employee file closure date.',
+          'Time until an employee is included in benefits - requires the applicable employment or benefits eligibility date and benefits enrollment or effective date.',
         ],
         methodsLabel: 'Planned analytical approach',
         methods: [
@@ -491,7 +491,7 @@ export const projects: Project[] = [
         links: [],
       },
       {
-        title: 'Excel Data Project — Customer Segmentation and Data Profiling',
+        title: 'Excel Data Project - Customer Segmentation and Data Profiling',
         description: 'A project exercise using a simulated transaction dataset for 100 hypothetical customers to examine data quality and transaction patterns.',
         objectives: [
           'Load and inspect the transaction dataset.',
@@ -499,7 +499,7 @@ export const projects: Project[] = [
           'Draft a client-style email describing the issues and recommending improvements to future data collection.',
           'Analyze monthly transaction volumes and average transaction amounts.',
           'Segment transactions by date and time to examine volume and spending throughout a typical day.',
-          'Summarize observations and recommendations in a 2–3 slide presentation.',
+          'Summarize observations and recommendations in a 2-3 slide presentation.',
         ],
         methods: [
           'Use Excel navigation and data management, functions and formulas, lookups and cell referencing, conditional aggregation, filters, and conditional formatting.',
@@ -508,7 +508,7 @@ export const projects: Project[] = [
         ],
         deliverables: [
           'Planned: a client-style email describing data quality issues and recommendations.',
-          'Planned: a 2–3 slide presentation summarizing observations and recommendations.',
+          'Planned: a 2-3 slide presentation summarizing observations and recommendations.',
         ],
         tools: ['Microsoft Excel'],
         links: [
@@ -520,7 +520,7 @@ export const projects: Project[] = [
       },
       {
         title: 'HR Workforce Analytics & Employee Attrition Intelligence',
-        statusLabel: 'Planned — data analysis and dashboard not yet verified',
+        statusLabel: 'Planned - data analysis and dashboard not yet verified',
         description: 'A planned workforce analytics project for a fictional medium-sized organization, focused on workforce composition, employee attrition, retention risks, compensation patterns, job satisfaction, and work-life balance.',
         overview: 'The project brief calls for an evidence-led view of workforce composition and employee attrition to help HR leadership investigate retention risks. No HR dataset or completed analysis artifacts were found in the available workspace, so this case study is presented as planned work.',
         businessProblem: 'HR leadership needs a clear, data-supported way to understand which employee groups are associated with attrition and where further investigation may be useful. Relationships in snapshot data will be described as associations, not causes.',
@@ -541,10 +541,10 @@ export const projects: Project[] = [
         ],
         dataset: 'The brief identifies the IBM HR Analytics Employee Attrition & Performance dataset as the intended primary source. No HR data file was found in the available workspace, so its schema, record count, data quality, and licensing have not been verified here. Any supplementary data must be clearly labeled synthetic.',
         dashboardPages: [
-          'Executive Workforce Overview — planned',
-          'Attrition Deep Dive — planned',
-          'Workforce Demographics — planned',
-          'Retention & Employee Experience — planned',
+          'Executive Workforce Overview - planned',
+          'Attrition Deep Dive - planned',
+          'Workforce Demographics - planned',
+          'Retention & Employee Experience - planned',
         ],
         findingsAndRecommendations: 'No data-derived findings or retention recommendations are reported yet because the dataset has not been inspected or analyzed.',
         limitations: [
