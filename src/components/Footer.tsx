@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, MessageCircle, Linkedin, Instagram, ArrowUpRight } from 'lucide-react';
+import { Mail, MessageCircle, Linkedin, Instagram } from 'lucide-react';
 import { footer, nav, contact, identity } from '@/content';
 
 export default function Footer() {
@@ -96,13 +96,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-forest-700/40 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sage-300 text-xs">
-            &copy; {new Date().getFullYear()} {footer.copyright}
-          </p>
-          <p className="text-sage-300 text-xs flex items-center gap-1">
-            {identity.brandName} - {identity.location}
-            <ArrowUpRight className="w-3 h-3" />
-          </p>
+          <p className="text-sage-300 text-xs w-full text-center">{footer.copyright}</p>
         </div>
       </div>
     </footer>

@@ -9,6 +9,8 @@ interface ImagePlaceholderProps {
   alt?: string;
   fit?: 'cover' | 'contain';
   blurredBackground?: boolean;
+  blurredBackgroundOpacity?: number;
+  blurredBackgroundBlur?: number;
 }
 
 export default function ImagePlaceholder({
@@ -19,6 +21,8 @@ export default function ImagePlaceholder({
   alt = '',
   fit = 'cover',
   blurredBackground = false,
+  blurredBackgroundOpacity,
+  blurredBackgroundBlur,
 }: ImagePlaceholderProps) {
   const [hasError, setHasError] = useState(false);
 
@@ -31,6 +35,17 @@ export default function ImagePlaceholder({
             alt=""
             aria-hidden="true"
             loading="lazy"
+            style={
+              blurredBackgroundOpacity === undefined && blurredBackgroundBlur === undefined
+                ? undefined
+                : {
+                    opacity: blurredBackgroundOpacity,
+                    filter:
+                      blurredBackgroundBlur === undefined
+                        ? undefined
+                        : `blur(${blurredBackgroundBlur}px) brightness(0.75)`,
+                  }
+            }
             className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl brightness-75"
           />
         )}

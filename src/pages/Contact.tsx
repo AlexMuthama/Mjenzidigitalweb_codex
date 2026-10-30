@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { Mail, MessageCircle, Linkedin, Instagram, Send, CheckCircle, AlertCircle, ArrowUpRight, Loader2 } from 'lucide-react';
+import { Mail, MessageCircle, Linkedin, Instagram, Send, CheckCircle, AlertCircle, ArrowUpRight, ArrowRight, Loader2 } from 'lucide-react';
 import { contact } from '@/content';
 
 type FormState = {
@@ -10,6 +10,13 @@ type FormState = {
 };
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
+
+const fieldLabels: Record<keyof FormState, string> = {
+  name: 'Name',
+  email: 'Email',
+  subject: 'Subject',
+  message: 'Message',
+};
 
 const initialState: FormState = {
   name: '',
@@ -25,6 +32,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [networkError, setNetworkError] = useState(false);
 
   const validate = (): FormErrors => {
     const errs: FormErrors = {};
@@ -35,9 +43,6 @@ export default function Contact() {
       errs.email = 'Please enter your email address.';
     } else if (!EMAIL_REGEX.test(form.email.trim())) {
       errs.email = 'Please enter a valid email address.';
-    }
-    if (!form.subject.trim()) {
-      errs.subject = 'Please add a subject.';
     }
     if (!form.message.trim()) {
       errs.message = 'Please write a message.';
@@ -66,11 +71,14 @@ export default function Contact() {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      const firstInvalidField = Object.keys(validationErrors)[0];
+      if (firstInvalidField) document.getElementById(firstInvalidField)?.focus();
       return;
     }
 
     setStatus('submitting');
     setErrorMsg('');
+    setNetworkError(false);
     setErrors({});
 
     try {
@@ -97,7 +105,8 @@ export default function Contact() {
       }
     } catch {
       setStatus('error');
-      setErrorMsg('Could not connect to the form service. Please email us directly at mjenzidigital@gmail.com.');
+      setNetworkError(true);
+      setErrorMsg('Could not connect to the form service. Please try again or contact us directly by email:');
     }
   };
 
@@ -114,32 +123,40 @@ export default function Contact() {
         <div className="container-mj relative py-16 md:py-24">
           <span className="section-label">Contact</span>
           <h1 className="text-display-xl text-forest-800 mt-5 max-w-4xl">
-            Let us build something that matters
+            Tell us what your business needs
           </h1>
           <p className="text-lg text-charcoal-700 mt-6 max-w-2xl leading-relaxed">
-            Whether you have a clear project in mind or are still exploring ideas, we would love to hear from you. Tell us about your business, your challenges, and what you are trying to achieve.
+            Mjenzi Digital welcomes enquiries from SMEs, startups, entrepreneurs and organisations looking for practical digital solutions—from websites and business systems to AI and workflow automation, dashboards, data analysis and digital marketing. Tell us what you are working on and what you would like to improve.
           </p>
+          <a href="#enquiry-form" className="btn-primary mt-7">
+            Start an enquiry
+            <ArrowRight className="w-5 h-5" aria-hidden="true" />
+          </a>
         </div>
       </section>
 
       {/* ─── CONTACT GRID ─────────────────────────────────────── */}
-      <section className="container-mj py-12 md:py-16">
+      <section id="enquiry-form" className="container-mj py-12 md:py-16 scroll-mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Form */}
           <div className="lg:col-span-7">
             <div className="card p-7 md:p-8">
-              <h2 className="text-display-md text-charcoal-900 mb-2">Send a message</h2>
+              <h2 id="enquiry-heading" className="text-display-md text-charcoal-900 mb-2">Send an enquiry</h2>
               <p className="text-sm text-charcoal-700 mb-6">
-                Fill this out and our team will get back to you as soon as possible.
+                Share a few details about what you need. After submission, the form will confirm whether your enquiry went through.
+              </p>
+
+              <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+                {status === 'submitting' ? 'Submitting your enquiry.' : ''}
               </p>
 
               {status === 'success' && (
-                <div className="mb-6 p-5 rounded-xl bg-lime-400/15 border border-lime-400/30 flex items-start gap-3 animate-fade-in">
-                  <CheckCircle className="w-5 h-5 text-forest-600 flex-shrink-0 mt-0.5" />
+                <div role="status" aria-live="polite" aria-atomic="true" className="mb-6 p-5 rounded-xl bg-lime-400/15 border border-lime-400/30 flex items-start gap-3 animate-fade-in">
+                  <CheckCircle className="w-5 h-5 text-forest-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
-                    <p className="font-semibold text-forest-800">Message sent successfully</p>
+                    <p className="font-semibold text-forest-800">Enquiry submitted successfully</p>
                     <p className="text-sm text-charcoal-700 mt-1">
-                      Thank you for reaching out. Your message has been delivered and our team will be in touch soon.
+                      Thank you for getting in touch. Your enquiry has been submitted through the contact form.
                     </p>
                     <button
                       onClick={() => setStatus('idle')}
@@ -152,26 +169,40 @@ export default function Contact() {
               )}
 
               {status === 'error' && (
-                <div className="mb-6 p-5 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 animate-fade-in">
-                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <div role="alert" aria-atomic="true" className="mb-6 p-5 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 animate-fade-in">
+                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <p className="font-semibold text-red-800">Could not send your message</p>
-                    <p className="text-sm text-red-700 mt-1">{errorMsg}</p>
+                    <p className="text-sm text-red-700 mt-1">
+                      {errorMsg}{networkError && <> <a href={`mailto:${contact.email}`} className="font-semibold underline underline-offset-2">{contact.email}</a>.</>}
+                    </p>
                   </div>
                 </div>
               )}
 
               {status !== 'success' && (
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <form onSubmit={handleSubmit} noValidate aria-labelledby="enquiry-heading" aria-busy={status === 'submitting'} className="space-y-5">
+                  {Object.keys(errors).length > 0 && (
+                    <div role="alert" aria-atomic="true" className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                      <p className="font-semibold">Please check the following fields:</p>
+                      <ul className="mt-2 list-inside list-disc space-y-1">
+                        {Object.entries(errors).map(([field, message]) => (
+                          <li key={field}>{fieldLabels[field as keyof FormState]}: {message}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label htmlFor="name" className="block text-sm font-semibold text-charcoal-900 mb-2">
-                        Name <span className="text-forest-600">*</span>
+                        Name <span className="text-forest-600" aria-hidden="true">*</span>
                       </label>
                       <input
                         type="text"
                         id="name"
                         name="name"
+                        autoComplete="name"
+                        required
                         value={form.name}
                         onChange={handleChange}
                         className={inputErrorClass('name')}
@@ -189,12 +220,14 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-semibold text-charcoal-900 mb-2">
-                        Email <span className="text-forest-600">*</span>
+                        Email <span className="text-forest-600" aria-hidden="true">*</span>
                       </label>
                       <input
                         type="email"
                         id="email"
                         name="email"
+                        autoComplete="email"
+                        required
                         value={form.email}
                         onChange={handleChange}
                         className={inputErrorClass('email')}
@@ -214,7 +247,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="subject" className="block text-sm font-semibold text-charcoal-900 mb-2">
-                      Subject <span className="text-forest-600">*</span>
+                      Subject <span className="text-xs font-normal text-charcoal-700">(optional)</span>
                     </label>
                     <input
                       type="text"
@@ -223,7 +256,7 @@ export default function Contact() {
                       value={form.subject}
                       onChange={handleChange}
                       className={inputErrorClass('subject')}
-                      placeholder="What is this about?"
+                      placeholder="e.g. Website or workflow automation"
                       aria-invalid={!!errors.subject}
                       aria-describedby={errors.subject ? 'subject-error' : undefined}
                       disabled={status === 'submitting'}
@@ -238,12 +271,13 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-charcoal-900 mb-2">
-                      Message <span className="text-forest-600">*</span>
+                      Message <span className="text-forest-600" aria-hidden="true">*</span>
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={6}
+                      required
                       value={form.message}
                       onChange={handleChange}
                       className={`${inputErrorClass('message')} resize-y`}
@@ -267,13 +301,13 @@ export default function Contact() {
                   >
                     {status === 'submitting' ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                         Sending...
                       </>
                     ) : (
                       <>
                         Send message
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                       </>
                     )}
                   </button>
@@ -284,86 +318,63 @@ export default function Contact() {
 
           {/* Direct contact sidebar */}
           <div className="lg:col-span-5">
-            <div className="card p-8">
-              <h2 className="font-display font-semibold text-xl text-charcoal-900 mb-6">
-                Other ways to reach us
+            <div className="pt-2 lg:pt-4">
+              <h2 className="font-display font-semibold text-xl text-charcoal-900">
+                Prefer direct contact?
               </h2>
+              <p className="mt-2 text-sm leading-relaxed text-charcoal-700">
+                You can also reach Mjenzi Digital by email or WhatsApp.
+              </p>
 
-              <div className="space-y-4">
-                {/* Email */}
+              <div className="mt-5 divide-y divide-forest-800/15 border-y border-forest-800/15">
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/30 hover:bg-forest-800/4 transition-all"
+                  className="group flex items-center gap-4 py-5 transition-colors hover:text-forest-700"
                 >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-800 text-lime-400 flex-shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-sage-400 uppercase tracking-wider">Email</p>
-                    <p className="text-charcoal-900 font-medium truncate">{contact.email}</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-forest-600 ml-auto flex-shrink-0" />
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-forest-800 text-lime-400">
+                    <Mail className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-sage-400">Email</span>
+                    <span className="block truncate font-medium text-charcoal-900 group-hover:text-forest-700">{contact.email}</span>
+                  </span>
+                  <ArrowUpRight className="ml-auto h-4 w-4 flex-shrink-0 text-forest-600" aria-hidden="true" />
                 </a>
 
-                {/* WhatsApp */}
                 <a
                   href={`https://wa.me/${contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
+                  className="group flex items-center gap-4 py-5 transition-colors hover:text-forest-700"
                 >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-800 text-lime-400 flex-shrink-0">
-                    <MessageCircle className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-sage-400 uppercase tracking-wider">WhatsApp</p>
-                    <p className="text-charcoal-900 font-medium truncate">{contact.whatsappDisplay}</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-forest-600 ml-auto flex-shrink-0" />
-                </a>
-
-                {/* LinkedIn */}
-                <a
-                  href={contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
-                >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-700 text-ivory-300 flex-shrink-0">
-                    <Linkedin className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-sage-400 uppercase tracking-wider">LinkedIn</p>
-                    <p className="text-charcoal-900 font-medium truncate">Connect on LinkedIn</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-forest-600 ml-auto flex-shrink-0" />
-                </a>
-
-                {/* Instagram */}
-                <a
-                  href={contact.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
-                >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-600 text-lime-400 flex-shrink-0">
-                    <Instagram className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-sage-400 uppercase tracking-wider">Instagram</p>
-                    <p className="text-charcoal-900 font-medium truncate">@alexx.muthama</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-forest-600 ml-auto flex-shrink-0" />
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-forest-800 text-lime-400">
+                    <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-semibold uppercase tracking-wider text-sage-400">WhatsApp</span>
+                    <span className="block font-medium text-charcoal-900 group-hover:text-forest-700">{contact.whatsappDisplay}</span>
+                  </span>
+                  <ArrowUpRight className="ml-auto h-4 w-4 flex-shrink-0 text-forest-600" aria-hidden="true" />
                 </a>
               </div>
-            </div>
 
-            {/* Response time note */}
-            <div className="mt-6 p-6 rounded-xl bg-forest-800 text-ivory-300">
-              <p className="text-sm leading-relaxed">
-                <span className="font-display font-semibold text-lime-400 block mb-2">Good to know</span>
-                Our team typically responds within 1–2 business days. For urgent matters, WhatsApp is fastest. Every conversation starts with understanding your problem - no pressure, no sales pitch.
-              </p>
+              <div className="mt-7">
+                <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-sage-400">
+                  Connect on social
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+                  <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-forest-700 transition-colors hover:text-forest-900">
+                    <Linkedin className="h-4 w-4" aria-hidden="true" />
+                    LinkedIn
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                  <a href={contact.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-forest-700 transition-colors hover:text-forest-900">
+                    <Instagram className="h-4 w-4" aria-hidden="true" />
+                    Instagram
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,203 +1,163 @@
+import { ArrowRight, ArrowUpRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  Compass,
-  Sparkles,
-  Wrench,
-  FlaskConical,
-  Rocket,
-  CheckCircle2,
-  ExternalLink,
-  Clock,
-} from 'lucide-react';
-import { now, building } from '@/content';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
+import { now, projects } from '@/content';
 
-const statusConfig: Record<string, { icon: typeof Compass; color: string; bg: string; ring: string }> = {
-  Exploring: { icon: Compass, color: 'text-sage-500', bg: 'bg-sage-100', ring: 'ring-sage-200' },
-  Building: { icon: Wrench, color: 'text-forest-600', bg: 'bg-forest-100', ring: 'ring-forest-200' },
-  Testing: { icon: FlaskConical, color: 'text-forest-600', bg: 'bg-forest-50', ring: 'ring-forest-200' },
-  Launched: { icon: Rocket, color: 'text-forest-800', bg: 'bg-lime-400/20', ring: 'ring-lime-400/40' },
-};
+const featuredProjectSlugs = ['embu-fashion-weekend-2026', 'marine-retreat-vlog'];
+const featuredProjects = projects.filter((project) =>
+  featuredProjectSlugs.includes(project.slug),
+);
 
 export default function Now() {
   return (
     <div className="animate-fade-in">
-      {/* ─── HEADER ───────────────────────────────────────────── */}
-      <section className="bg-brand-green text-forest-800 border-b border-forest-800/6 relative overflow-hidden">
+      <section className="relative overflow-hidden border-b border-forest-800/10 bg-brand-green text-forest-800">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-50" />
         <div className="container-mj relative py-16 md:py-24">
           <span className="section-label">{now.label}</span>
-          <h1 className="text-display-xl text-forest-800 mt-5 max-w-4xl">
+          <h1 className="text-display-xl mt-5 max-w-4xl text-forest-800">
             {now.title}
           </h1>
-          <p className="text-lg text-charcoal-700 mt-6 max-w-3xl leading-relaxed">
-            {now.intro}
-          </p>
-          <p className="flex items-center gap-2 text-sm text-forest-600 font-medium mt-6">
-            <Clock className="w-4 h-4" />
-            Last updated: {now.lastUpdated}
-          </p>
+          <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <p className="max-w-3xl text-lg leading-relaxed text-charcoal-700">
+              {now.intro}
+            </p>
+            <p className="flex shrink-0 items-center gap-2 text-sm font-medium text-forest-600">
+              <Clock className="h-4 w-4" aria-hidden="true" />
+              <span>Last updated: {now.lastUpdated}</span>
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ─── CURRENT FOCUS ────────────────────────────────────── */}
-      <section className="container-mj py-12 md:py-16">
-        <div className="max-w-4xl">
-          <span className="section-label">Current Focus</span>
-          <h2 className="text-display-lg text-charcoal-900 mt-4 mb-8">
-            Where our energy is going right now
+      <section className="container-mj py-14 md:py-20">
+        <div className="max-w-3xl">
+          <span className="section-label">Current priorities</span>
+          <h2 className="text-display-lg mt-4 text-charcoal-900">
+            Where our attention is going
           </h2>
+        </div>
 
-          <div className="space-y-4">
-            {now.focus.map((item, i) => (
-              <div
-                key={i}
-                className="card p-6 flex items-start gap-5 group"
-              >
-                <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-lime-400/15 text-forest-600 flex-shrink-0 group-hover:bg-lime-400 group-hover:text-forest-800 transition-colors">
-                  <span className="font-display font-bold text-sm">{String(i + 1).padStart(2, '0')}</span>
+        <div className="mt-9 grid gap-9 md:mt-12 md:grid-cols-3 md:gap-8">
+          {now.priorities.map((priority, index) => (
+            <article key={priority.title} className="border-t border-forest-800/20 pt-5">
+              <span className="font-display text-sm font-semibold tracking-wide text-forest-600">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-4 font-display text-xl font-semibold leading-snug text-charcoal-900">
+                {priority.title}
+              </h3>
+              <p className="mt-3 leading-relaxed text-charcoal-700">
+                {priority.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-forest-800/10 bg-brand-green py-14 md:py-20">
+        <div className="container-mj">
+          <div className="max-w-3xl">
+            <span className="section-label">What we’re building</span>
+            <h2 className="text-display-lg mt-4 text-charcoal-900">
+              Work, services, and initiatives in motion
+            </h2>
+            <p className="mt-4 leading-relaxed text-charcoal-700">
+              A current view of Mjenzi Digital’s work and Alex’s wider ecosystem involvement.
+            </p>
+          </div>
+
+          <div className="mt-9 grid gap-x-12 gap-y-10 md:mt-12 md:grid-cols-2">
+            {now.initiatives.map((initiative) => (
+              <article key={initiative.title} className="border-t border-forest-800/20 pt-5">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-forest-600">
+                    {initiative.status}
+                  </span>
+                  {initiative.kind !== 'portfolio' && (
+                    <a
+                      href={initiative.link}
+                      target={initiative.external ? '_blank' : undefined}
+                      rel={initiative.external ? 'noopener noreferrer' : undefined}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-700 transition-colors hover:text-forest-900"
+                    >
+                      {initiative.linkLabel}
+                      {initiative.external ? (
+                        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                      ) : (
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      )}
+                    </a>
+                  )}
                 </div>
-                <div>
-                  <p className="text-lg font-display font-semibold text-charcoal-900 leading-snug mb-1">
-                    {item.title}
-                  </p>
-                  <p className="text-charcoal-700 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
+                <h3 className="mt-3 font-display text-xl font-semibold leading-snug text-charcoal-900">
+                  {initiative.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-charcoal-700">
+                  {initiative.description}
+                </p>
+
+                {initiative.kind === 'portfolio' && (
+                  <ul className="mt-5 divide-y divide-forest-800/15 border-y border-forest-800/15">
+                    {featuredProjects.map((project) => (
+                      <li key={project.slug} className="py-4">
+                        <Link
+                          to={`/work/${project.slug}`}
+                          className="group flex items-start justify-between gap-4"
+                        >
+                          <span>
+                            <span className="block font-semibold text-charcoal-900 transition-colors group-hover:text-forest-700">
+                              {project.name}
+                            </span>
+                            <span className="mt-1 block text-sm leading-relaxed text-charcoal-700">
+                              {project.summary}
+                            </span>
+                          </span>
+                          <span className="mt-1 shrink-0 text-xs font-medium text-forest-600">
+                            {project.status}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── WHAT WE ARE BUILDING ─────────────────────────────── */}
-      <section className="bg-brand-green border-y border-forest-800/6 py-12 md:py-16">
-        <div className="container-mj">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-              <span className="section-label">What We Are Building</span>
-              <h2 className="text-display-lg text-charcoal-900 mt-5 max-w-2xl">
-                A live record of things in progress
-              </h2>
-              <p className="text-charcoal-700 mt-4 max-w-2xl leading-relaxed">
-                These are experiments, projects, and ideas we are actively developing. Each one has a status - Exploring, Building, Testing, or Launched - and a latest update so customers can see exactly where things stand.
-              </p>
-            </div>
+      <section className="container-mj py-14 md:py-20">
+        <div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+          <div>
+            <span className="section-label">What’s next</span>
+            <h2 className="text-display-lg mt-4 text-charcoal-900">
+              The work ahead
+            </h2>
           </div>
-
-          {/* Status legend */}
-          <div className="flex flex-wrap gap-3 mb-8">
-            {Object.entries(statusConfig).map(([status, cfg]) => {
-              const Icon = cfg.icon;
-              const count = building.filter((b) => b.status === status).length;
-              return (
-                <div
-                  key={status}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full ${cfg.bg} ring-1 ${cfg.ring}`}
-                >
-                  <Icon className={`w-4 h-4 ${cfg.color}`} />
-                  <span className="text-sm font-semibold text-charcoal-800">{status}</span>
-                  <span className={`text-xs ${cfg.color} font-bold`}>{count}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Building entries */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {building.map((entry, i) => {
-              const cfg = statusConfig[entry.status];
-              const StatusIcon = cfg.icon;
-
-              return (
-                <article
-                  key={i}
-                  className="card p-6 group"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${cfg.bg} ring-1 ${cfg.ring}`}>
-                      <StatusIcon className={`w-4 h-4 ${cfg.color}`} />
-                      <span className={`text-sm font-semibold ${cfg.color}`}>{entry.status}</span>
-                    </div>
-                    {entry.link && (
-                      <a
-                        href={entry.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-forest-600 hover:text-forest-800 transition-colors"
-                        aria-label="View external link"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-
-                  <h3 className="font-display font-semibold text-xl text-charcoal-900 mb-2 leading-snug">
-                    {entry.name}
-                  </h3>
-                  <p className="text-sm text-charcoal-700 leading-relaxed mb-4">
-                    {entry.description}
-                  </p>
-
-                  {/* Latest update */}
-                  <div className="p-4 rounded-xl bg-forest-800/4 border border-forest-800/6 mb-4">
-                    <p className="flex items-center gap-2 text-xs font-semibold text-forest-600 uppercase tracking-wider mb-2">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      Latest Update
-                    </p>
-                    <p className="text-sm text-charcoal-700 leading-relaxed">{entry.latestUpdate}</p>
-                  </div>
-
-                  {/* Tools */}
-                  <div className="flex flex-wrap gap-2">
-                    {entry.tools.map((tool, ti) => (
-                      <span
-                        key={ti}
-                        className="px-2.5 py-1 rounded-lg bg-forest-800/6 text-charcoal-700 text-xs font-medium"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Image placeholder */}
-                  {entry.image && (
-                    <div className="mt-4">
-                      <ImagePlaceholder
-                        src={entry.image}
-                        alt={entry.name}
-                        aspectRatio="aspect-[16/9]"
-                        className="rounded-xl"
-                      />
-                    </div>
-                  )}
-                </article>
-              );
-            })}
-          </div>
-
-          {/* Disclaimer */}
-          <p className="text-center text-sm text-sage-400 mt-8 max-w-xl mx-auto">
-            This is a transparent view of ongoing work. As projects progress, we update each status, latest update, image, and link.
-          </p>
+          <ul className="divide-y divide-forest-800/15 border-y border-forest-800/15">
+            {now.next.map((item) => (
+              <li key={item} className="py-4 leading-relaxed text-charcoal-700 md:py-5">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* ─── APPROACH REMINDER ────────────────────────────────── */}
-      <section className="container-mj py-12 md:py-16">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-forest-800 text-lime-400 mx-auto mb-6">
-            <CheckCircle2 className="w-7 h-7" />
-          </div>
-          <h2 className="text-display-lg text-charcoal-900 mb-4">
-            Technology is a tool, not the goal
-          </h2>
-          <p className="text-lg text-charcoal-700 leading-relaxed mb-6">
-            Everything above is built on the same philosophy: understand the problem first, find the simplest practical solution, build it, and improve it from real use. The tools change - the approach does not.
+      <section className="bg-forest-800 py-14 text-ivory-300 md:py-16">
+        <div className="container-mj text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-lime-400">
+            Mjenzi Digital
           </p>
-          <Link to="/contact" className="btn-primary text-base">
-            Let us build something valuable together
-            <ArrowRight className="w-5 h-5" />
+          <h2 className="text-display-lg mx-auto mt-4 max-w-3xl text-ivory-300">
+            Building something meaningful?
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-ivory-300/80">
+            Tell us what your business is working through. We’ll discuss a practical digital solution for your needs.
+          </p>
+          <Link to="/contact" className="btn-primary mt-7 inline-flex text-base">
+            Start a conversation
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>
         </div>
       </section>

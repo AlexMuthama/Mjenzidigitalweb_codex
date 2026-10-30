@@ -93,9 +93,12 @@ export default function Home() {
             <div className="lg:col-span-5 animate-fade-up" style={{ animationDelay: '200ms' }}>
               <ImagePlaceholder
                 src={images.hero}
-                alt="Two Black African women collaborating on laptops in a modern workspace"
+                alt="A woman reviewing business analytics on a laptop in a modern office overlooking a city"
                 aspectRatio="aspect-[43/64]"
                 fit="contain"
+                blurredBackground
+                blurredBackgroundOpacity={0.9}
+                blurredBackgroundBlur={10}
                 className="home-original-ratio-image mx-auto w-full max-w-[400px] rounded-3xl shadow-2xl ring-1 ring-forest-800/10"
               />
             </div>

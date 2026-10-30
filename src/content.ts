@@ -702,32 +702,72 @@ export const building: BuildingEntry[] = [
 // ─── NOW PAGE ───────────────────────────────────────────────────────────
 export const now = {
   label: 'Now',
-  title: 'What we are focused on right now',
+  title: "What we're focused on right now",
   intro:
-    'A snapshot of what we are actively developing, testing, and building toward. This page updates as our focus shifts and gives customers a clear view of the work shaping our agency.',
-  focus: [
+    "An ongoing look at what we're building, the initiatives we're contributing to, the ideas we're exploring and the work shaping our next chapter.",
+  lastUpdated: 'October 2026',
+  priorities: [
     {
-      title: 'Building practical AI and automation solutions',
-      desc: 'Experimenting with AI-assisted workflows that save businesses time on repetitive tasks.',
+      title: 'Growing Mjenzi Digital',
+      description:
+        'Delivering websites, digital platforms, business systems, AI and workflow automation, data analysis, dashboards, and digital marketing. We are continuing to strengthen our portfolio and relationships with clients.',
     },
     {
-      title: 'Developing websites, business systems and dashboards',
-      desc: 'Creating digital tools that help businesses work smarter, not harder.',
+      title: 'Contributing to the startup ecosystem',
+      description:
+        'Through Startups for Startups EA, Alex contributes to entrepreneurship development, community engagement, networking, training initiatives, and connections that support founders and emerging businesses.',
     },
     {
-      title: 'Strengthening our portfolio through real projects and demos',
-      desc: 'Every project - client engagement or experiment - helps us improve our methods and demonstrate practical value.',
-    },
-    {
-      title: 'Connecting with businesses, founders, mentors and collaborators',
-      desc: 'Looking for people who want to build something meaningful together.',
-    },
-    {
-      title: 'Developing Mjenzi into a sustainable, scalable business',
-      desc: 'Turning a philosophy of building into a business that creates real value for clients.',
+      title: 'Developing as a founder',
+      description:
+        'Building practical technology and business capabilities through implementation and project work, strengthening professional relationships, and exploring how technology can support entrepreneurship and growth.',
     },
   ],
-  lastUpdated: 'October 2026',
+  initiatives: [
+    {
+      kind: 'link',
+      external: false,
+      title: 'Mjenzi Digital website',
+      status: 'Live',
+      description:
+        'The Mjenzi Digital website is live, sharing the agency’s services, work, and ways to start a conversation.',
+      linkLabel: 'Visit the website',
+      link: '/',
+    },
+    {
+      kind: 'link',
+      external: false,
+      title: 'AI and workflow automation',
+      status: 'Available',
+      description:
+        'Practical AI assistants, document-based knowledge retrieval, workflow and form automation, email notifications, and integrations that help reduce repetitive manual work and streamline business operations.',
+      linkLabel: 'Explore services',
+      link: '/services',
+    },
+    {
+      kind: 'link',
+      external: true,
+      title: 'Startups for Startups EA',
+      status: 'Active initiative',
+      description:
+        'Alex contributes to an entrepreneurship development organisation connecting founders and supporting an enabling ecosystem for startups and emerging businesses.',
+      linkLabel: 'Visit Startups for Startups EA',
+      link: 'https://startupsforstartups.africa/',
+    },
+    {
+      kind: 'portfolio',
+      title: 'Portfolio and creative projects',
+      status: 'Ongoing',
+      description:
+        'Selected projects and creative work, shown with the status recorded in their case studies.',
+    },
+  ],
+  next: [
+    'Continue delivering practical digital services for businesses.',
+    'Add clear case studies as projects progress and details are ready to share.',
+    'Keep contributing to entrepreneurship and startup ecosystem initiatives.',
+    'Build on the overlap between technology, business systems, and sustainable growth.',
+  ],
 };
 
 // ─── NAVIGATION ─────────────────────────────────────────────────────────
@@ -747,14 +787,14 @@ export const nav = {
 export const footer = {
   tagline: 'Build smarter. Grow further.',
   philosophy: 'Build better systems. Support better work. Create lasting value.',
-  copyright: 'Mjenzi Digital. All rights reserved.',
+  copyright: '© 2026 Mjenzi Digital. All rights reserved.',
 };
 
 // ─── IMAGE PLACEHOLDERS ─────────────────────────────────────────────────
 // Reference images (free-to-use from Pexels) used as design accents.
 // Replace with your own images when ready.
 export const images = {
-  hero: '/Home/New%20Africa.jpeg',
+  hero: '/Home/Home%20first%20image.jpeg',
   // Founder portrait shown on the About page
   aboutPhoto: "/founder/Founder_Pic'.jpeg",
   // Nairobi skyline - Kenyan identity accent for intro section
