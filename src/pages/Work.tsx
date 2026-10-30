@@ -15,11 +15,11 @@ export default function Work() {
   return (
     <div className="animate-fade-in">
       {/* ─── HEADER ───────────────────────────────────────────── */}
-      <section className="bg-ivory-300 border-b border-forest-800/6 relative overflow-hidden">
+      <section className="bg-brand-green text-forest-800 border-b border-forest-800/6 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-50" />
         <div className="container-mj relative py-16 md:py-24">
           <span className="section-label">{work.label}</span>
-          <h1 className="text-display-xl text-charcoal-900 mt-5 max-w-4xl">
+          <h1 className="text-display-xl text-forest-800 mt-5 max-w-4xl">
             {work.title}
           </h1>
           <p className="text-lg text-charcoal-700 mt-6 max-w-3xl leading-relaxed">

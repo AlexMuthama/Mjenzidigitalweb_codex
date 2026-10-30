@@ -109,11 +109,11 @@ export default function Contact() {
   return (
     <div className="animate-fade-in">
       {/* ─── HEADER ───────────────────────────────────────────── */}
-      <section className="bg-ivory-300 border-b border-forest-800/6 relative overflow-hidden">
+      <section className="bg-brand-green text-forest-800 border-b border-forest-800/6 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-50" />
         <div className="container-mj relative py-16 md:py-24">
           <span className="section-label">Contact</span>
-          <h1 className="text-display-xl text-charcoal-900 mt-5 max-w-4xl">
+          <h1 className="text-display-xl text-forest-800 mt-5 max-w-4xl">
             Let us build something that matters
           </h1>
           <p className="text-lg text-charcoal-700 mt-6 max-w-2xl leading-relaxed">
@@ -310,9 +310,9 @@ export default function Contact() {
                   href={`https://wa.me/${contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-[#25D366]/40 hover:bg-[#25D366]/5 transition-all"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
                 >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#25D366] text-white flex-shrink-0">
+                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-800 text-lime-400 flex-shrink-0">
                     <MessageCircle className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
@@ -327,9 +327,9 @@ export default function Contact() {
                   href={contact.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5 transition-all"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
                 >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-[#0A66C2] text-white flex-shrink-0">
+                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-700 text-ivory-300 flex-shrink-0">
                     <Linkedin className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
@@ -344,9 +344,9 @@ export default function Contact() {
                   href={contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-[#E1306C]/40 hover:bg-[#E1306C]/5 transition-all"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-forest-800/10 hover:border-forest-600/40 hover:bg-forest-800/5 transition-all"
                 >
-                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white flex-shrink-0">
+                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-forest-600 text-lime-400 flex-shrink-0">
                     <Instagram className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">

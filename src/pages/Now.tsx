@@ -16,7 +16,7 @@ import ImagePlaceholder from '@/components/ImagePlaceholder';
 const statusConfig: Record<string, { icon: typeof Compass; color: string; bg: string; ring: string }> = {
   Exploring: { icon: Compass, color: 'text-sage-500', bg: 'bg-sage-100', ring: 'ring-sage-200' },
   Building: { icon: Wrench, color: 'text-forest-600', bg: 'bg-forest-100', ring: 'ring-forest-200' },
-  Testing: { icon: FlaskConical, color: 'text-amber-600', bg: 'bg-amber-50', ring: 'ring-amber-200' },
+  Testing: { icon: FlaskConical, color: 'text-forest-600', bg: 'bg-forest-50', ring: 'ring-forest-200' },
   Launched: { icon: Rocket, color: 'text-forest-800', bg: 'bg-lime-400/20', ring: 'ring-lime-400/40' },
 };
 
@@ -24,17 +24,17 @@ export default function Now() {
   return (
     <div className="animate-fade-in">
       {/* ─── HEADER ───────────────────────────────────────────── */}
-      <section className="bg-ivory-300 border-b border-forest-800/6 relative overflow-hidden">
+      <section className="bg-brand-green text-forest-800 border-b border-forest-800/6 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-50" />
         <div className="container-mj relative py-16 md:py-24">
           <span className="section-label">{now.label}</span>
-          <h1 className="text-display-xl text-charcoal-900 mt-5 max-w-4xl">
+          <h1 className="text-display-xl text-forest-800 mt-5 max-w-4xl">
             {now.title}
           </h1>
           <p className="text-lg text-charcoal-700 mt-6 max-w-3xl leading-relaxed">
             {now.intro}
           </p>
-          <p className="flex items-center gap-2 text-sm text-sage-400 font-medium mt-6">
+          <p className="flex items-center gap-2 text-sm text-forest-600 font-medium mt-6">
             <Clock className="w-4 h-4" />
             Last updated: {now.lastUpdated}
           </p>
@@ -71,7 +71,7 @@ export default function Now() {
       </section>
 
       {/* ─── WHAT WE ARE BUILDING ─────────────────────────────── */}
-      <section className="bg-ivory-100 border-y border-forest-800/6 py-12 md:py-16">
+      <section className="bg-brand-green border-y border-forest-800/6 py-12 md:py-16">
         <div className="container-mj">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>

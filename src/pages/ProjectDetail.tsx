@@ -36,7 +36,7 @@ export default function ProjectDetail() {
   return (
     <div className="animate-fade-in">
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="bg-ivory-300 border-b border-forest-800/6 relative overflow-hidden">
+      <section className="bg-brand-green text-forest-800 border-b border-forest-800/6 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-50" />
         <div className="container-mj relative py-12 md:py-20">
           <Link
@@ -57,7 +57,7 @@ export default function ProjectDetail() {
             </span>
           </div>
 
-          <h1 className="text-display-xl text-charcoal-900 max-w-4xl mb-6">
+          <h1 className="text-display-xl text-forest-800 max-w-4xl mb-6">
             {project.name}
           </h1>
           <p className="text-lg md:text-xl text-charcoal-700 max-w-3xl leading-relaxed">

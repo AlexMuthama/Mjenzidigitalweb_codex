@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <div className="home-page animate-fade-in">
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-ivory-300">
+      <section className="relative overflow-hidden bg-brand-green text-forest-800">
         <div className="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] opacity-60" />
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-lime-400/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-forest-500/5 rounded-full blur-3xl" />
@@ -64,7 +64,7 @@ export default function Home() {
                 <span className="text-sage-400 text-sm font-medium">{identity.title}</span>
               </div>
 
-              <h1 className="text-display-2xl text-charcoal-900 mb-5 animate-fade-up" style={{ animationDelay: '100ms' }}>
+              <h1 className="text-display-2xl text-forest-800 mb-5 animate-fade-up" style={{ animationDelay: '100ms' }}>
                 {home.hero.headline}
               </h1>
 
@@ -216,7 +216,7 @@ export default function Home() {
       </section>
 
       {/* ─── BUILDING TEASER ──────────────────────────────────── */}
-      <section className="bg-ivory-100 py-16 md:py-20 border-y border-forest-800/6 home-scroll-reveal">
+      <section className="bg-brand-green py-16 md:py-20 border-y border-forest-800/6 home-scroll-reveal">
         <div className="container-mj">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <div>
@@ -240,7 +240,7 @@ export default function Home() {
                     entry.status === 'Testing' ? FlaskConical : Rocket;
                   const statusColor = entry.status === 'Exploring' ? 'bg-sage-100 text-sage-500' :
                     entry.status === 'Building' ? 'bg-forest-100 text-forest-600' :
-                    entry.status === 'Testing' ? 'bg-amber-50 text-amber-600' :
+                    entry.status === 'Testing' ? 'bg-forest-50 text-forest-600' :
                     'bg-lime-400/20 text-forest-800';
                   return (
                     <div
